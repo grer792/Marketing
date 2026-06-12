@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "build-data": "node scripts/build-data-from-whisper.js",
+    "build-split-screen": "node scripts/build-split-screen.js",
     "preview": "remotion studio",
-    "render": "remotion render src/index.ts VideoEdit out/IMG_0345_edited.mp4"
+    "render": "remotion render src/index.ts VideoEdit out/IMG_0345_edited.mp4",
+    "render-split": "remotion render src/index.ts SplitScreenEdit out/split-screen-edited.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",

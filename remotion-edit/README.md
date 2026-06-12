@@ -61,3 +61,44 @@ npm run render
 ```
 
 Output: `out/IMG_0345_edited.mp4`
+
+---
+
+## Split-screen overlay edit (separate project)
+
+A second composition, `SplitScreenEdit`, takes a main video plus two overlay
+clips and splits the screen (top = main video, bottom = overlay) at specific
+points in the main video.
+
+### 1. Build the edit data
+
+```powershell
+node scripts/build-split-screen.js `
+  "C:\Users\grer7\AppData\Local\CapCut\Videos\0211\0612(1).mp4" `
+  "C:\Users\grer7\Downloads\overlay1.MP4" `
+  "C:\Users\grer7\Downloads\overlay 2.MP4" `
+  19.23 54.10
+```
+
+This probes each video with ffprobe, copies them into `public/` as
+`main.mp4`, `overlay1.mp4`, `overlay2.mp4`, and writes
+`src/data/split-screen-data.ts` with the real durations/resolution. The last
+two arguments (`19.23` / `54.10`) are when each overlay's split-screen window
+starts, in seconds into the main video.
+
+### 2. Preview live
+
+```powershell
+npm run preview -- --composition SplitScreenEdit
+```
+
+Adjust `mainStart` / `duration` for each overlay in
+`src/data/split-screen-data.ts` and Studio hot-reloads.
+
+### 3. Render
+
+```powershell
+npm run render-split
+```
+
+Output: `out/split-screen-edited.mp4`
